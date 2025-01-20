@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
+   
    [SerializeField] private float _speed = 9;
+   [SerializeField] private string playerTag = "Player"; // Tag to identify the player
 
    private Transform _target;
 
@@ -28,6 +30,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Check if the colliding object has the player tag
+        if (collision.gameObject.CompareTag(playerTag))
+        {
+            Application.Quit();
+        }
+    }
 
 }
